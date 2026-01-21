@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<title>System Alert</title>
+<style>
+body {
+  background: black;
+  color: red;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding-top: 80px;
+}
+
+#box {
+  border: 3px solid red;
+  padding: 30px;
+  width: 70%;
+  margin: auto;
+  animation: blink 1s infinite;
+}
+
+@keyframes blink {
+  0% {opacity:1;}
+  50% {opacity:0.4;}
+  100% {opacity:1;}
+}
+
+#progress {
+  width: 80%;
+  height: 25px;
+  border: 1px solid red;
+  margin: 20px auto;
+}
+
+#bar {
+  height: 100%;
+  width: 0%;
+  background: red;
+}
+
+.hidden {
+  display:none;
+}
+</style>
+</head>
+<body>
+
+<audio id="alarm" autoplay loop>
+  <source src="https://www.soundjay.com/misc/sounds/fail-buzzer-01.mp3" type="audio/mpeg">
+</audio>
+
+<div id="box">
+  <h1>⚠ SYSTEM WARNING ⚠</h1>
+  <p>Virus Trojan.Android.Agent terdeteksi!</p>
+  <p>Data sedang diambil...</p>
+
+  <div id="progress">
+    <div id="bar"></div>
+  </div>
+
+  <p id="percent">0%</p>
+</div>
+
+<div id="prank" class="hidden">
+  <h1 style="color:lime;">😂 PRANK!</h1>
+  <p style="color:white;">Tenang bro 😆</p>
+  <p style="color:white;">Ini cuma simulasi HTML, tidak ada virus.</p>
+</div>
+
+<script>
+let width = 0;
+let bar = document.getElementById("bar");
+let percent = document.getElementById("percent");
+
+let loading = setInterval(() => {
+  if (width >= 100) {
+    clearInterval(loading);
+    document.getElementById("box").style.display="none";
+    document.getElementById("prank").style.display="block";
+    document.getElementById("alarm").pause();
+  } else {
+    width++;
+    bar.style.width = width + "%";
+    percent.innerText = width + "%";
+  }
+}, 80
